@@ -26,8 +26,11 @@ class JokeState(BaseModel):
 
 
 def show_menu(state:JokeState) -> dict:
-    user_input = input("[n] Next  [c] Category  [q] Quit\n> ").strip().lower()
-    return {"jokes_choice": user_input}  
+    while True:
+        user_input = input("[n] Next  [c] Category  [q] Quit\n> ").strip().lower()
+        if user_input in ["n", "c", "q"]:
+            return {"jokes_choice": user_input}  
+        print("❌  Wrong input! Please enter n, c, or q.   ❌")
 
 def fetch_joke(state: JokeState) -> dict:
     joke_text = get_joke(language=state.language, category=state.category)
